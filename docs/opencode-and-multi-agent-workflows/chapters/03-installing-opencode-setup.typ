@@ -29,9 +29,9 @@ git clone https://github.com/felipebalbi/opencode-setup.git \
 cd ~/workspace/opencode-setup
 
 dst="$HOME/.config/opencode"
-mkdir -p "$dst/agent"
-for f in "$PWD/agent"/*.md; do
-    ln -sf "$f" "$dst/agent/$(basename "$f")"
+mkdir -p "$dst/agents"
+for f in "$PWD/agents"/*.md; do
+    ln -sf "$f" "$dst/agents/$(basename "$f")"
 done
 
 # Only if you don't already have a global opencode.jsonc.
@@ -46,11 +46,11 @@ git clone https://github.com/felipebalbi/opencode-setup.git `
 Set-Location D:\workspace\opencode-setup
 
 $dst = Join-Path $env:USERPROFILE ".config\opencode"
-New-Item -ItemType Directory -Path (Join-Path $dst "agent") -Force | Out-Null
-Get-ChildItem -LiteralPath (Join-Path $PWD "agent") -Filter *.md |
+New-Item -ItemType Directory -Path (Join-Path $dst "agents") -Force | Out-Null
+Get-ChildItem -LiteralPath (Join-Path $PWD "agents") -Filter *.md |
   ForEach-Object {
     New-Item -ItemType SymbolicLink -Force `
-      -Path (Join-Path $dst "agent\$($_.Name)") -Target $_.FullName
+      -Path (Join-Path $dst "agents\$($_.Name)") -Target $_.FullName
   }
 # Symlinks need Developer Mode or an elevated shell.
 ```
@@ -58,7 +58,7 @@ Get-ChildItem -LiteralPath (Join-Path $PWD "agent") -Filter *.md |
 
 #content-slide("What just happened")[
   #bullets(
-    [`~/.config/opencode/agent/*.md` are now symlinks back to
+    [`~/.config/opencode/agents/*.md` are now symlinks back to
      the clone. `git pull` updates them in place.],
     [`~/.config/opencode/opencode.jsonc` is the baseline config
      (only if you didn't have one already).],

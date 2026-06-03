@@ -5,7 +5,7 @@
 
 #section-slide("8", "The eight")
 
-#content-slide("What lives in `agent/`")[
+#content-slide("What lives in `agents/`")[
   #three-col(
     bullets(
       [*architect* --- design],

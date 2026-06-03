@@ -9,8 +9,8 @@
     //
     // What this file deliberately does NOT do:
     //  - No `skills.paths`. opencode already auto-scans the canonical
-    //    skill locations: project-local `.opencode/skill/`, global
-    //    `~/.config/opencode/skill/`, plus `~/.claude/skills/` and
+    //    skill locations: project-local `.opencode/skills/`, global
+    //    `~/.config/opencode/skills/`, plus `~/.claude/skills/` and
     //    `~/.agents/skills/`. If your personal skills live elsewhere,
     //    register that path in a local override (see below), not here.
     //  - No `provider` overrides. Add machine- or workspace-specific

@@ -4,8 +4,8 @@ Personal [opencode](https://opencode.ai) configuration:
 
 - a generic baseline set of subagents (architect, coder, coordinator,
   docs, integrator, reliability, reviewer, tester) intended to live at
-  `~/.config/opencode/agent/` and be overridden file-by-file by
-  per-project `.opencode/agent/<name>.md` files;
+  `~/.config/opencode/agents/` and be overridden file-by-file by
+  per-project `.opencode/agents/<name>.md` files;
 - a generic baseline `opencode.jsonc` that pulls the
   [superpowers](https://github.com/obra/superpowers) plugin (and its
   bundled skills) and enables LSP integration.
@@ -25,7 +25,7 @@ Without a global baseline, every project carries its own copy of the same
 eight files and they drift.
 
 This repo is the canonical source of truth for the baseline. Per-project
-`.opencode/agent/` directories carry only the deltas that genuinely need
+`.opencode/agents/` directories carry only the deltas that genuinely need
 project context (a wire-protocol invariant, a CI matrix detail, a
 peripheral-driver pattern).
 
@@ -55,7 +55,7 @@ silently; updates happen when opencode restarts and re-resolves.
 
 opencode reads its global config from `~/.config/opencode/`
 (`%USERPROFILE%\.config\opencode\` on Windows). Drop this repo's
-`opencode.jsonc` and `agent/*.md` files there.
+`opencode.jsonc` and `agents/*.md` files there.
 
 > **Heads-up about `opencode.jsonc`.** If you already have a global
 > `opencode.jsonc` (or `opencode.json`) with machine-specific bits like
@@ -73,7 +73,7 @@ opencode reads its global config from `~/.config/opencode/`
 >    `OPENCODE_CONFIG`. opencode deep-merges the env-var config on
 >    top of the global one.
 > 3. **You have an existing global config that already pulls
->    superpowers:** just install the `agent/*.md` files; skip the
+>    superpowers:** just install the `agents/*.md` files; skip the
 >    `opencode.jsonc` step entirely. You already have what this repo
 >    provides.
 
@@ -91,12 +91,12 @@ PowerShell:
 ```powershell
 # Run from the root of your opencode-setup clone.
 $dst = Join-Path $env:USERPROFILE ".config\opencode"
-New-Item -ItemType Directory -Path (Join-Path $dst "agent") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $dst "agents") -Force | Out-Null
 
-# Agents: symlink each baseline into ~/.config/opencode/agent/
-Get-ChildItem -LiteralPath (Join-Path $PWD "agent") -Filter *.md | ForEach-Object {
+# Agents: symlink each baseline into ~/.config/opencode/agents/
+Get-ChildItem -LiteralPath (Join-Path $PWD "agents") -Filter *.md | ForEach-Object {
     New-Item -ItemType SymbolicLink `
-        -Path (Join-Path $dst "agent\$($_.Name)") `
+        -Path (Join-Path $dst "agents\$($_.Name)") `
         -Target $_.FullName -Force
 }
 
@@ -117,11 +117,11 @@ POSIX (bash/zsh):
 ```sh
 # Run from the root of your opencode-setup clone.
 dst="$HOME/.config/opencode"
-mkdir -p "$dst/agent"
+mkdir -p "$dst/agents"
 
-# Agents: symlink each baseline into ~/.config/opencode/agent/
-for f in "$PWD/agent"/*.md; do
-    ln -sf "$f" "$dst/agent/$(basename "$f")"
+# Agents: symlink each baseline into ~/.config/opencode/agents/
+for f in "$PWD/agents"/*.md; do
+    ln -sf "$f" "$dst/agents/$(basename "$f")"
 done
 
 # opencode.jsonc: symlink ONLY if no global config already exists.
@@ -141,9 +141,9 @@ If you cannot create symlinks, copy instead — but re-run after every
 ```powershell
 # Run from the root of your opencode-setup clone.
 $dst = Join-Path $env:USERPROFILE ".config\opencode"
-New-Item -ItemType Directory -Path (Join-Path $dst "agent") -Force | Out-Null
-Copy-Item -LiteralPath (Join-Path $PWD "agent\*.md") `
-    -Destination (Join-Path $dst "agent") -Force
+New-Item -ItemType Directory -Path (Join-Path $dst "agents") -Force | Out-Null
+Copy-Item -LiteralPath (Join-Path $PWD "agents\*.md") `
+    -Destination (Join-Path $dst "agents") -Force
 
 $cfgDst = Join-Path $dst "opencode.jsonc"
 $cfgAlt = Join-Path $dst "opencode.json"
@@ -158,8 +158,8 @@ if ((Test-Path $cfgDst) -or (Test-Path $cfgAlt)) {
 ```sh
 # Run from the root of your opencode-setup clone.
 dst="$HOME/.config/opencode"
-mkdir -p "$dst/agent"
-cp -f "$PWD/agent/"*.md "$dst/agent/"
+mkdir -p "$dst/agents"
+cp -f "$PWD/agents/"*.md "$dst/agents/"
 
 if [ -e "$dst/opencode.jsonc" ] || [ -e "$dst/opencode.json" ]; then
     echo "warn: existing opencode config detected at $dst — leaving it alone." >&2
@@ -178,15 +178,15 @@ use the cache.
 
 ## Per-project overrides
 
-opencode resolves agents by name. A project's `.opencode/agent/<name>.md`
-fully replaces the global `~/.config/opencode/agent/<name>.md` of the same
+opencode resolves agents by name. A project's `.opencode/agents/<name>.md`
+fully replaces the global `~/.config/opencode/agents/<name>.md` of the same
 name. There is no field-level merge — the project file is the entire
 agent definition for that project.
 
 Workflow for a project that needs to specialise an agent:
 
 1. Start from this repo's baseline file as the seed.
-2. Copy it to `<project>/.opencode/agent/<name>.md`.
+2. Copy it to `<project>/.opencode/agents/<name>.md`.
 3. Add the project-specific bits: trigger keywords in `description`, hard
    rules and tripwires under "How you work", project-specific examples,
    citations of `AGENTS.md` / `CONTRIBUTING.md` / CI scripts.
@@ -230,7 +230,7 @@ interactively as the top-level agent.
   skills.
 - **Plugin / marketplace manifests for other tools.** opencode-only
   for now. Adding Agency Copilot or Claude Code support later means
-  wrapping `agent/` (and eventually `skill/`) in a `plugin.json` and
+  wrapping `agents/` (and eventually `skill/`) in a `plugin.json` and
   optionally a `marketplace.json`.
 - **Machine-specific config.** No `provider` overrides, no `mcp`
   servers, no `model` default, no `skills.paths`. Put those in your

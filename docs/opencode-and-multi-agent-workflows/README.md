@@ -71,6 +71,6 @@ opencode-setup equivalents or generic phrasing.
 ## Source material
 
 The deck grounds the agent examples in the real files under
-`agent/` at the root of this repo. If you edit a persona, the
+`agents/` at the root of this repo. If you edit a persona, the
 corresponding slide in `chapters/07-anatomy.typ` or
 `chapters/08-the-eight.typ` may drift.

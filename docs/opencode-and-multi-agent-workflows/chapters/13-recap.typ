@@ -50,13 +50,13 @@ You are the <Name>: <one-sentence role>. Goal: <one-sentence outcome>.
     [`opencode-setup` ships the eight, the plugin, and a
      baseline `opencode.jsonc`.],
     [Overrides go in `local.jsonc` (yours) and
-     `.opencode/agent/` (per-project), never in the upstream.],
+     `.opencode/agents/` (per-project), never in the upstream.],
     [Subagents = fresh context + scoped tools + model
      routing + parallelism.],
     [Cheap by default; premium on a named trigger.],
     [No kitchen sinks, no duplicates, no secrets in prompts.],
   ),
-  deeper: [`agent/` in this repo, and
+  deeper: [`agents/` in this repo, and
   `docs/presentation-template/` for your own decks.],
 )
 

@@ -11,7 +11,7 @@
      extra skill paths, default model --- all in a personal
      overlay file that opencode merges on top of the baseline.],
     [*Per-project, when it matters.* A
-     `<project>/.opencode/agent/<name>.md` file fully replaces
+     `<project>/.opencode/agents/<name>.md` file fully replaces
      the global agent of the same name --- no merge, just
      replacement.],
   )
@@ -58,7 +58,7 @@ it stays on your machine.
 
 #content-slide("Per-project agent overrides")[
   #bullets(
-    [Drop a `<project>/.opencode/agent/architect.md` (for example)
+    [Drop a `<project>/.opencode/agents/architect.md` (for example)
      in any repo you work on.],
     [That file *replaces* the global `architect` agent while
      you're working in that project. There is no field-level
@@ -76,7 +76,7 @@ it stays on your machine.
   (
     [Personal overlay via `local.jsonc` + `OPENCODE_CONFIG`.],
     [Per-project agent overrides via
-     `<project>/.opencode/agent/<name>.md`.],
+     `<project>/.opencode/agents/<name>.md`.],
     [The baseline is shared; the deltas are yours.],
   ),
   next: "Why the eight personas are not just longer prompts.",

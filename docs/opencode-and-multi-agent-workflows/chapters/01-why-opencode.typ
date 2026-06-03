@@ -63,7 +63,7 @@
      overlays deep-merge on top.],
     [Agents and skills are plain Markdown ---
      no manifest required.],
-    [Per-project `.opencode/agent/<name>.md`
+    [Per-project `.opencode/agents/<name>.md`
      overrides the global by name.],
   ),
   verdict: [Both work. I find opencode more *comfortable*.],

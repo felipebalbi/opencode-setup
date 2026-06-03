@@ -7,8 +7,8 @@
 
 #content-slide("Where they live")[
   #bullets(
-    [User-scoped (global): `~/.config/opencode/agent/<name>.md`],
-    [Project-scoped: `<project>/.opencode/agent/<name>.md`],
+    [User-scoped (global): `~/.config/opencode/agents/<name>.md`],
+    [Project-scoped: `<project>/.opencode/agents/<name>.md`],
     [Markdown body, YAML frontmatter at the top.],
     [opencode discovers them automatically; no registration step.],
     [Project scope wins over user scope, file-by-file, by name.],

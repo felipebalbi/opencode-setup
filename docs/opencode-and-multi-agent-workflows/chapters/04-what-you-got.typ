@@ -7,7 +7,7 @@
 
 #content-slide("Three things landed in your global scope")[
   #numbered(
-    [*Eight subagent personas* under `~/.config/opencode/agent/`
+    [*Eight subagent personas* under `~/.config/opencode/agents/`
      --- architect, coder, coordinator, docs, integrator,
      reliability, reviewer, tester.],
     [*A baseline `opencode.jsonc`* that turns on LSP integration
