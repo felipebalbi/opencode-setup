@@ -1,0 +1,43 @@
+{
+    // Generic baseline opencode config shipped by opencode-setup.
+    //
+    // What this file does:
+    //  - Pulls the superpowers plugin (https://github.com/obra/superpowers)
+    //    via a git URL. Plugins are loaded once at startup; quit and
+    //    restart opencode after editing this file.
+    //  - Enables LSP integration so the model can use language servers.
+    //
+    // What this file deliberately does NOT do:
+    //  - No `skills.paths`. opencode already auto-scans the canonical
+    //    skill locations: project-local `.opencode/skill/`, global
+    //    `~/.config/opencode/skill/`, plus `~/.claude/skills/` and
+    //    `~/.agents/skills/`. If your personal skills live elsewhere,
+    //    register that path in a local override (see below), not here.
+    //  - No `provider` overrides. Add machine- or workspace-specific
+    //    model definitions in a local override, not here.
+    //  - No `mcp` servers. MCP servers are usually environment-specific
+    //    (auth, network, tooling availability) and belong in a local
+    //    override.
+    //  - No `model` / `small_model` / `default_agent`. Pick those in a
+    //    local override so this baseline stays portable.
+    //
+    // To extend without modifying this file: opencode merges configs
+    // from global, project, and the OPENCODE_CONFIG env var. Put
+    // personal overrides in OPENCODE_CONFIG=~/.config/opencode/local.jsonc
+    // and they will deep-merge on top of this baseline. Example:
+    //
+    //   // ~/.config/opencode/local.jsonc
+    //   {
+    //     "$schema": "https://opencode.ai/config.json",
+    //     "skills": { "paths": ["~/.copilot/skills"] },
+    //     "model": "github-copilot/claude-opus-4.7-1m-internal"
+    //   }
+
+    "$schema": "https://opencode.ai/config.json",
+
+    "lsp": true,
+
+    "plugin": [
+        "superpowers@git+https://github.com/obra/superpowers.git"
+    ]
+}

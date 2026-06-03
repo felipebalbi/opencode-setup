@@ -1,0 +1,41 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-*
+
+# Temporary / backup
+*.tmp
+*.bak
+*.orig
+
+# Node / opencode plugin scaffolding (only present if a project uses it)
+node_modules/
+package-lock.json
+bun.lock
+pnpm-lock.yaml
+yarn.lock
+
+# Local opencode runtime data, in case someone clones this into a project
+.opencode/node_modules/
+.opencode/.cache/
+
+# Local design / notes, never the source of truth
+SCRATCH.md
+NOTES.md
+TODO.md
+docs/superpowers/
+
+# Internal deck variant.
+docs/*-internal/
+
+# Built Typst deck artefacts.
+*.pdf
+
